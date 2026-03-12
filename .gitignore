@@ -1,0 +1,12 @@
+zig-out/
+zig-cache/
+.zig-cache/
+.DS_Store
+.env
+.env.local
+*.pem
+*.key
+*.pfx
+*.p12
+*.pdf
+*_Error_Log.md
