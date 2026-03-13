@@ -16,7 +16,7 @@ jobs:
         run: |
           ZIG_URL=$(curl -s https://ziglang.org/download/index.json | jq -r '.master."x86_64-linux".tarball')
           curl -L "$ZIG_URL" | tar -xJ
-          ZIG_DIR=$(ls -d zig-linux-x86_64-*)
+          ZIG_DIR=$(ls -d zig-*/)
           echo "$PWD/$ZIG_DIR" >> $GITHUB_PATH
 
       - name: Build
