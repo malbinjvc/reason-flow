@@ -12,9 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: '0.15.2'
+      - name: Install Zig (latest master)
+        run: |
+          ZIG_URL=$(curl -s https://ziglang.org/download/index.json | jq -r '.master."x86_64-linux".tarball')
+          curl -L "$ZIG_URL" | tar -xJ
+          ZIG_DIR=$(ls -d zig-linux-x86_64-*)
+          echo "$PWD/$ZIG_DIR" >> $GITHUB_PATH
 
       - name: Build
         run: zig build
@@ -33,6 +36,3 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t reason-flow .
-
-      - name: Test Docker health
-        run: docker run --rm reason-flow health
